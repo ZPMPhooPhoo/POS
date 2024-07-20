@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/common")
 public class CommonController {
 
+    // error page 
+    
     @RequestMapping(value = "/error", method=RequestMethod.GET)
     public String error() {
         return "error";
