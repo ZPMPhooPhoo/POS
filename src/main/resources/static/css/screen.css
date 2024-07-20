@@ -1,7 +1,22 @@
+@charset "UTF-8";
+
 root{
+    --font-family: 'Arial, sans-serif';
+    --white-color: #FFFFFF;
+    --black-color: #000000;
+    --green-color: #4A5C2F;
+    --orange-color: #E8C5A3;
+    --blue-color: #B1CED4;
+    --extra-color: #EC5A5A;
+    --size-14:14px;
+    --size-12:12px;
+    --size-16:16px;
+    --size-16:18px;
+    --size-16:20px;
 
 }
 
 body{
-    
+    font-family: var(--font-family);
+    background-color: var(--white-color) !important;
 }

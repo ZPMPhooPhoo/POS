@@ -26,6 +26,7 @@
 
 <body>
     <div class="row">
+        <!-- side bar -->
         <div class="sidebar col-2">
             <h1 class="mt-3 text-center">SideBar</h1>
             <ul class="mt-5">
@@ -46,11 +47,15 @@
                 onclick="location.href='/logout'">Logout</button>
 
         </div>
+
+        <!-- Body -->
         <div class="content col-auto">
             <section layout:fragment="content">
                 <p>This is filled by the content template.</p>
             </section>
         </div>
+
+        <!-- Right area -->
         <div class="col-3">
             <H1>R-area</H1>
         </div>
