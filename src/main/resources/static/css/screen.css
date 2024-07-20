@@ -8,15 +8,16 @@ root{
     --orange-color: #E8C5A3;
     --blue-color: #B1CED4;
     --extra-color: #EC5A5A;
-    --size-14:14px;
     --size-12:12px;
+    --size-14:14px;
     --size-16:16px;
-    --size-16:18px;
-    --size-16:20px;
+    --size-18:18px;
+    --size-20:20px;
+    --size-45:45px;
 
 }
 
 body{
-    font-family: var(--font-family);
+    font-family: var(--font-family) !important;
     background-color: var(--white-color) !important;
 }
