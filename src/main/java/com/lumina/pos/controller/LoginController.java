@@ -34,12 +34,11 @@ public class LoginController {
     @RequestMapping(value = "/register", method=RequestMethod.POST)
     public String register(User user,Model model) {
         try {
-
-            logger.debug("Register Screen!"+user);
+            logger.info("Register Screen!"+user);
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
             return "redirect:/common/error";
         }
-        return "login/register";
+        return "redirect:/register";
     }
 }
