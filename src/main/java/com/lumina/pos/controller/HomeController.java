@@ -12,10 +12,5 @@ public class HomeController {
     public String home() {
         return "home/index";
     }
-    
-    @RequestMapping(value = "/reg", method=RequestMethod.GET)
-    public String register() {
-        return "login/register";
-    }
-    
+       
 }

@@ -1,13 +1,18 @@
 @charset "UTF-8";
 
-root{
+:root{
     --font-family: 'Arial, sans-serif';
     --white-color: #FFFFFF;
     --black-color: #000000;
     --green-color: #4A5C2F;
-    --orange-color: #E8C5A3;
-    --blue-color: #B1CED4;
-    --extra-color: #EC5A5A;
+    --light-orange: #E8C5A3;
+    --light-blue: #B1CED4;
+    --orange-color: #EC5A5A;
+    --red-color:#f4152b;
+    --blue-color:#2d0aee;
+
+    --size-2:2px;
+    --size-10:10px;
     --size-12:12px;
     --size-14:14px;
     --size-16:16px;
@@ -20,4 +25,42 @@ root{
 body{
     font-family: var(--font-family) !important;
     background-color: var(--white-color) !important;
+}
+
+
+.form-container {
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-header {
+    margin-bottom: 30px;
+}
+
+.require{
+    padding:var(--size-2) !important;
+    margin-right: var(--size-2) !important;
+    font-size: var(--size-14) !important;
+    color: var(--red-color) !important;
+}
+
+.common_rdo:hover{
+      background-color: var(--blue-color) !important;
+      color: var(--white-color) !important;
+      cursor: pointer;
+}
+.common_rdo_check{
+      background-color: var(--blue-color) !important;
+      color: var(--white-color) !important;
+}
+
+.errorMessage{
+    color:var(--red-color) !important;
+    font-size: var(--size-12) !important;
+    margin-left: var(--size-10) !important;
+}
+
+.error{
+    border-color: var(--red-color) !important;
 }
