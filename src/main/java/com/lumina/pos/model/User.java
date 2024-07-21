@@ -16,7 +16,7 @@ public class User {
     private String gender;
     private String dob;
     private Integer age;
-    private Address address;
+    private String address;
     private String role;
     private LocalDate createdDate = LocalDate.now();
     private Integer updatedStatus;
