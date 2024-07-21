@@ -1,7 +1,11 @@
-# spring:
-#   data:
-#     mongodb:
-#       uri: "mongodb+srv://nainglinthant1998:nainglinthant1998@customerdb0.jg9rnlh.mongodb.net/nainglinthant?retryWrites=true&w=majority"
+spring:
+  data:
+    mongodb:
+      uri: "mongodb+srv://zinphoomon:zinphoomon@atlascluster.akcw5bt.mongodb.net/restaurant_db?retryWrites=true&w=majority&appName=AtlasCluster"
+
+logging:
+  level:
+    org.mongodb.driver: DEBUG
 #   mail:
 #     host: smtp.gmail.com
 #     port: 587
