@@ -196,6 +196,7 @@
                     $("#dobRequire").addClass("d-none");
                     $("#dob").removeClass("error");
                     dobCheck = true;
+                    $("#age").val(calculateAge(val));
                 } else {
                     $("#dobRequire").removeClass("d-none");
                     $("#dob").addClass("error");
@@ -230,6 +231,7 @@
                     addressCheck = false;
                 }
             }
+
 
             $("#name").on("input", function () {
                 nameRequireCheck();

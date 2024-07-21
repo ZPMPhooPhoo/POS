@@ -44,3 +44,16 @@ function phoneFormat(val){
         return false;
     }
 }
+
+function calculateAge(dob) {
+    var dob = new Date(dob);
+    var today = new Date();
+    var age = today.getFullYear() - dob.getFullYear();
+    var monthDifference = today.getMonth() - dob.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+
+    return age;
+}
