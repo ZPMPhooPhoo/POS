@@ -24,16 +24,17 @@ public class LoginController {
             logger.info("Accept Register Screen!");
             HashMap<String, String> genderList = Constant.gender();
             model.addAttribute("genderList", genderList);
-            model.addAttribute("userinfo", user);
+            model.addAttribute("user", user);
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
             return "redirect:/common/error";
         }
         return "login/register";
     }
-      @RequestMapping(value = "/register", method=RequestMethod.POST)
+    @RequestMapping(value = "/register", method=RequestMethod.POST)
     public String register(User user,Model model) {
         try {
+
             logger.debug("Register Screen!"+user);
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
