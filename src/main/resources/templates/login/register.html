@@ -1,548 +1,510 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{common/singleLayout}"
->
-  <head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{common/singleLayout}">
+
+<head>
     <script th:inline="javascript">
-      document.getElementById("pagetitle").innerText = "Register";
-      var nameCheck =
-        (fatherNameCheck =
-        emailCheck =
-        passwordCheck =
-        phoneCheck =
-        nrcCheck =
-        genderCheck =
-        roleCheck =
-        dobCheck =
-        ageCheck =
-        addressCheck =
-          true);
+        document.getElementById("pagetitle").innerText = "Register";
+        var nameCheck =
+            (fatherNameCheck =
+                emailCheck =
+                passwordCheck =
+                phoneCheck =
+                nrcCheck =
+                genderCheck =
+                roleCheck =
+                dobCheck =
+                ageCheck =
+                addressCheck =
+                true);
 
-      $(document).ready(function () {
-        // name require check
-        function nameRequireCheck() {
-          var val = $("#name").val();
-          if (require(val)) {
-            $("#nameRequire").addClass("d-none");
-            $("#name").removeClass("error");
-            nameCheck = true;
-          } else {
-            $("#nameRequire").removeClass("d-none");
-            $("#name").addClass("error");
-            nameCheck = false;
-          }
-        }
-
-        // father name require check
-        function fatherNameRequiredCheck() {
-          var val = $("#fatherName").val();
-          if (require(val)) {
-            $("#fatherNameRequire").addClass("d-none");
-            $("#fatherName").removeClass("error");
-            fatherNameCheck = true;
-          } else {
-            $("#fatherNameRequire").removeClass("d-none");
-            $("#fatherName").addClass("error");
-            fatherNameCheck = false;
-          }
-        }
-
-        //email require and format check
-        function emailRequiredCheck() {
-          var val = $("#email").val();
-          if (require(val)) {
-            if (validateEmail(val)) {
-              $("#emailRequire").addClass("d-none");
-              $("#emailFormat").addClass("d-none");
-              $("#email").removeClass("error");
-              emailCheck = true;
-            } else {
-              $("#emailRequire").addClass("d-none");
-              $("#emailFormat").removeClass("d-none");
-              $("#email").addClass("error");
-              emailCheck = false;
+        $(document).ready(function () {
+            var genderList = /*[[${genderList}]]*/ null;
+            // name require check
+            function nameRequireCheck() {
+                var val = $("#name").val();
+                if (require(val)) {
+                    $("#nameRequire").addClass("d-none");
+                    $("#name").removeClass("error");
+                    nameCheck = true;
+                } else {
+                    $("#nameRequire").removeClass("d-none");
+                    $("#name").addClass("error");
+                    nameCheck = false;
+                }
             }
-          } else {
-            $("#emailRequire").removeClass("d-none");
-            $("#emailFormat").addClass("d-none");
-            $("#email").addClass("error");
-            emailCheck = false;
-          }
-        }
 
-        //password require and format check
-        function passwordRequiredCheck() {
-          var val = $("#password").val();
-          if (require(val)) {
-            if (!passLength(val, 8)) {
-              $("#passwordRequire").addClass("d-none");
-              $("#passwordLength").removeClass("d-none");
-              $("#passwordFormat").addClass("d-none");
-              $("#password").addClass("error");
-              passwordCheck = false;
-            } else if (!passFormat(val)) {
-              $("#passwordRequire").addClass("d-none");
-              $("#passwordLength").addClass("d-none");
-              $("#passwordFormat").removeClass("d-none");
-              $("#password").addClass("error");
-              passwordCheck = false;
-            } else {
-              $("#passwordRequire").addClass("d-none");
-              $("#passwordLength").addClass("d-none");
-              $("#passwordFormat").addClass("d-none");
-              $("#password").removeClass("error");
-              passwordCheck = true;
+            // father name require check
+            function fatherNameRequiredCheck() {
+                var val = $("#fatherName").val();
+                if (require(val)) {
+                    $("#fatherNameRequire").addClass("d-none");
+                    $("#fatherName").removeClass("error");
+                    fatherNameCheck = true;
+                } else {
+                    $("#fatherNameRequire").removeClass("d-none");
+                    $("#fatherName").addClass("error");
+                    fatherNameCheck = false;
+                }
             }
-          } else {
-            $("#passwordRequire").removeClass("d-none");
-            $("#passwordLength").addClass("d-none");
-            $("#passwordFormat").addClass("d-none");
-            $("#password").addClass("error");
-            passwordCheck = false;
-          }
-        }
 
-        //phone require and format check
-        function phoneRequiredCheck() {
-          var val = $("#phone").val();
-          if (require(val)) {
-            if (!passLength(val, 11)) {
-              $("#phoneRequire").addClass("d-none");
-              $("#phoneLength").removeClass("d-none");
-              $("#phoneFormat").addClass("d-none");
-              $("#phone").addClass("error");
-              phoneCheck = false;
-            } else if (!phoneFormat(val)) {
-              $("#phoneRequire").addClass("d-none");
-              $("#phoneLength").addClass("d-none");
-              $("#phoneFormat").removeClass("d-none");
-              $("#phone").addClass("error");
-              phoneCheck = false;
-            } else {
-              $("#phoneRequire").addClass("d-none");
-              $("#phoneLength").addClass("d-none");
-              $("#phoneFormat").addClass("d-none");
-              $("#phone").removeClass("error");
-              phoneCheck = true;
+            //email require and format check
+            function emailRequiredCheck() {
+                var val = $("#email").val();
+                if (require(val)) {
+                    if (validateEmail(val)) {
+                        $("#emailRequire").addClass("d-none");
+                        $("#emailFormat").addClass("d-none");
+                        $("#email").removeClass("error");
+                        emailCheck = true;
+                    } else {
+                        $("#emailRequire").addClass("d-none");
+                        $("#emailFormat").removeClass("d-none");
+                        $("#email").addClass("error");
+                        emailCheck = false;
+                    }
+                } else {
+                    $("#emailRequire").removeClass("d-none");
+                    $("#emailFormat").addClass("d-none");
+                    $("#email").addClass("error");
+                    emailCheck = false;
+                }
             }
-          } else {
-            $("#phoneRequire").removeClass("d-none");
-            $("#phoneLength").addClass("d-none");
-            $("#phoneFormat").addClass("d-none");
-            $("#phone").addClass("error");
-            phoneCheck = false;
-          }
+
+            //password require and format check
+            function passwordRequiredCheck() {
+                var val = $("#password").val();
+                if (require(val)) {
+                    if (!passLength(val, 8)) {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").removeClass("d-none");
+                        $("#passwordFormat").addClass("d-none");
+                        $("#password").addClass("error");
+                        passwordCheck = false;
+                    } else if (!passFormat(val)) {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").addClass("d-none");
+                        $("#passwordFormat").removeClass("d-none");
+                        $("#password").addClass("error");
+                        passwordCheck = false;
+                    } else {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").addClass("d-none");
+                        $("#passwordFormat").addClass("d-none");
+                        $("#password").removeClass("error");
+                        passwordCheck = true;
+                    }
+                } else {
+                    $("#passwordRequire").removeClass("d-none");
+                    $("#passwordLength").addClass("d-none");
+                    $("#passwordFormat").addClass("d-none");
+                    $("#password").addClass("error");
+                    passwordCheck = false;
+                }
+            }
+
+            //phone require and format check
+            function phoneRequiredCheck() {
+                var val = $("#phone").val();
+                if (require(val)) {
+                    if (!passLength(val, 11)) {
+                        $("#phoneRequire").addClass("d-none");
+                        $("#phoneLength").removeClass("d-none");
+                        $("#phoneFormat").addClass("d-none");
+                        $("#phone").addClass("error");
+                        phoneCheck = false;
+                    } else if (!phoneFormat(val)) {
+                        $("#phoneRequire").addClass("d-none");
+                        $("#phoneLength").addClass("d-none");
+                        $("#phoneFormat").removeClass("d-none");
+                        $("#phone").addClass("error");
+                        phoneCheck = false;
+                    } else {
+                        $("#phoneRequire").addClass("d-none");
+                        $("#phoneLength").addClass("d-none");
+                        $("#phoneFormat").addClass("d-none");
+                        $("#phone").removeClass("error");
+                        phoneCheck = true;
+                    }
+                } else {
+                    $("#phoneRequire").removeClass("d-none");
+                    $("#phoneLength").addClass("d-none");
+                    $("#phoneFormat").addClass("d-none");
+                    $("#phone").addClass("error");
+                    phoneCheck = false;
+                }
+            }
+
+            // nrc require check
+            function nrcRequireCheck() {
+                var val = $("#nrc").val();
+                if (require(val)) {
+                    $("#nrcRequire").addClass("d-none");
+                    $("#nrc").removeClass("error");
+                    nrcCheck = true;
+                } else {
+                    $("#nrcRequire").removeClass("d-none");
+                    $("#nrc").addClass("error");
+                    nrcCheck = false;
+                }
+            }
+
+            //gender
+
+            function genderRequire(){
+                $.each(genderList, function (index, value) {
+                    $("#gender_" + index).click(function () {
+                        if ($("#gender_" + index).is(":checked")) {
+                        $(".gender").removeClass("error");
+                        $("#genderRequire").removeClass("d-none");
+                        $(".gender").removeClass("common_rdo_check");
+                        $("#list_" + index).addClass("common_rdo_check");
+                        genderCheck=true;
+
+                    }
+                });
+            });
+            if($(".gendereq").is(":checked")){
+                $(".gender").removeClass("error");
+                $("#genderRequire").addClass("d-none");
+                genderCheck=true;
+            }else{
+                $(".gender").addClass("error");
+                $("#genderRequire").removeClass("d-none");
+                genderCheck=false;
+            }
         }
 
-        // nrc require check
-        function nrcRequireCheck() {
-          var val = $("#nrc").val();
-          if (require(val)) {
-            $("#nrcRequire").addClass("d-none");
-            $("#nrc").removeClass("error");
-            nrcCheck = true;
-          } else {
-            $("#nrcRequire").removeClass("d-none");
-            $("#nrc").addClass("error");
-            nrcCheck = false;
-          }
-        }
+            //  role require check
+            function roleRequireCheck() {
+                var val = $("#role").val();
+                if (require(val)) {
+                    $("#roleRequire").addClass("d-none");
+                    $("#role").removeClass("error");
+                    roleCheck = true;
+                } else {
+                    $("#roleRequire").removeClass("d-none");
+                    $("#role").addClass("error");
+                    roleCheck = false;
+                }
+            }
 
-        //  role require check
-        function roleRequireCheck() {
-          var val = $("#role").val();
-          if (require(val)) {
-            $("#roleRequire").addClass("d-none");
-            $("#role").removeClass("error");
-            roleCheck = true;
-          } else {
-            $("#roleRequire").removeClass("d-none");
-            $("#role").addClass("error");
-            roleCheck = false;
-          }
-        }
+            // dob require check
+            function dobRequireCheck() {
+                var val = $("#dob").val();
+                if (require(val)) {
+                    $("#dobRequire").addClass("d-none");
+                    $("#dob").removeClass("error");
+                    dobCheck = true;
+                } else {
+                    $("#dobRequire").removeClass("d-none");
+                    $("#dob").addClass("error");
+                    dobCheck = false;
+                }
+            }
 
-        // dob require check
-        function dobRequireCheck() {
-          var val = $("#dob").val();
-          if (require(val)) {
-            $("#dobRequire").addClass("d-none");
-            $("#dob").removeClass("error");
-            dobCheck = true;
-          } else {
-            $("#dobRequire").removeClass("d-none");
-            $("#dob").addClass("error");
-            dobCheck = false;
-          }
-        }
+            // age require check
+            function ageRequireCheck() {
+                var val = $("#age").val();
+                if (require(val)) {
+                    $("#ageRequire").addClass("d-none");
+                    $("#age").removeClass("error");
+                    ageCheck = true;
+                } else {
+                    $("#ageRequire").removeClass("d-none");
+                    $("#age").addClass("error");
+                    ageCheck = false;
+                }
+            }
 
-        // age require check
-        function ageRequireCheck() {
-          var val = $("#age").val();
-          if (require(val)) {
-            $("#ageRequire").addClass("d-none");
-            $("#age").removeClass("error");
-            ageCheck = true;
-          } else {
-            $("#ageRequire").removeClass("d-none");
-            $("#age").addClass("error");
-            ageCheck = false;
-          }
-        }
+            // address require check
+            function addressRequireCheck() {
+                var val = $("#address").val();
+                if (require(val)) {
+                    $("#addressRequire").addClass("d-none");
+                    $("#address").removeClass("error");
+                    addressCheck = true;
+                } else {
+                    $("#addressRequire").removeClass("d-none");
+                    $("#address").addClass("error");
+                    addressCheck = false;
+                }
+            }
 
-        // address require check
-        function addressRequireCheck() {
-          var val = $("#address").val();
-          if (require(val)) {
-            $("#addressRequire").addClass("d-none");
-            $("#address").removeClass("error");
-            addressCheck = true;
-          } else {
-            $("#addressRequire").removeClass("d-none");
-            $("#address").addClass("error");
-            addressCheck = false;
-          }
-        }
+            $("#name").on("input", function () {
+                nameRequireCheck();
+            });
 
-        $("#name").on("input", function () {
-          nameRequireCheck();
+            $("#fatherName").on("input", function () {
+                fatherNameRequiredCheck();
+            });
+
+            $("#email").on("input", function () {
+                emailRequiredCheck();
+            });
+
+            $("#password").on("input", function () {
+                passwordRequiredCheck();
+            });
+
+            $("#phone").on("input", function () {
+                phoneRequiredCheck();
+            });
+
+            $("#nrc").on("input", function () {
+                nrcRequireCheck();
+            });
+            
+            $(".gender").on("click", function () {
+                genderRequire();
+            });
+
+            $("#role").on("input", function () {
+                roleRequireCheck();
+            });
+
+            $("#dob").on("input", function () {
+                dobRequireCheck();
+            });
+
+            $("#age").on("input", function () {
+                ageRequireCheck();
+            });
+
+            $("#address").on("input", function () {
+                addressRequireCheck();
+            });
+            // click submit button
+
+            $("#nextBtn").on("click", function () {
+                nameRequireCheck();
+                fatherNameRequiredCheck();
+                emailRequiredCheck();
+                passwordRequiredCheck();
+                phoneRequiredCheck();
+                nrcRequireCheck();
+                roleRequireCheck();
+                dobRequireCheck();
+                ageRequireCheck();
+                addressRequireCheck();
+                genderRequire();
+
+                if (
+                    nameCheck &&
+                    fatherNameCheck &&
+                    emailCheck &&
+                    passwordCheck &&
+                    phoneCheck &&
+                    nrcCheck &&
+                    roleCheck &&
+                    dobCheck &&
+                    ageCheck &&
+                    addressCheck &&
+                    genderCheck
+                ) {
+                    $("#regForm").submit();
+                }
+            });
         });
-
-        $("#fatherName").on("input", function () {
-          fatherNameRequiredCheck();
-        });
-
-        $("#email").on("input", function () {
-          emailRequiredCheck();
-        });
-
-        $("#password").on("input", function () {
-          passwordRequiredCheck();
-        });
-
-        $("#phone").on("input", function () {
-          phoneRequiredCheck();
-        });
-
-        $("#nrc").on("input", function () {
-          nrcRequireCheck();
-        });
-
-        $("#role").on("input", function () {
-          roleRequireCheck();
-        });
-
-        $("#dob").on("input", function () {
-          dobRequireCheck();
-        });
-
-        $("#age").on("input", function () {
-          ageRequireCheck();
-        });
-
-        $("#address").on("input", function () {
-          addressRequireCheck();
-        });
-        // click submit button
-
-        $("#nextBtn").on("click", function () {
-          nameRequireCheck();
-          fatherNameRequiredCheck();
-          emailRequiredCheck();
-          passwordRequiredCheck();
-          phoneRequiredCheck();
-          nrcRequireCheck();
-          roleRequireCheck();
-          dobRequireCheck();
-          ageRequireCheck();
-          addressRequireCheck();
-
-          if (
-            nameCheck &&
-            fatherNameCheck &&
-            emailCheck &&
-            passwordCheck &&
-            phoneCheck &&
-            nrcCheck &&
-            roleCheck &&
-            dobCheck &&
-            ageCheck &&
-            addressCheck
-          ) {
-            $("#regForm").submit();
-          }
-        });
-      });
     </script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="form-container">
-            <h2 class="form-header text-center">Register</h2>
-            <form
-              th:action="@{/register}"
-              th:object="${userinfo}"
-              method="post"
-              id="regForm"
-            >
-              <div class="form-row">
-                <!-- Name -->
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    maxlength="30"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                  />
-                  <label class="errorMessage d-none" id="nameRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Name!
-                  </label>
-                </div>
-                <!-- Father Name -->
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Father's Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    maxlength="30"
-                    id="fatherName"
-                    name="fatherName"
-                    placeholder="Enter your father's name"
-                  />
-                  <label class="errorMessage d-none" id="fatherNameRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Father's Name!
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <!-- Email -->
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Email</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    maxlength="30"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    autocomplete="username"
-                  />
-                  <label class="errorMessage d-none" id="emailRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Email!
-                  </label>
-                  <label class="errorMessage d-none" id="emailFormat">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Wrong Email Format!
-                  </label>
-                </div>
-                <!-- Password -->
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Password</span>
-                  </label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
-                  />
-                  <label class="errorMessage d-none" id="passwordRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Password!
-                  </label>
-                  <label class="errorMessage d-none" id="passwordFormat">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Wrong Password Format!
-                  </label>
-                  <label class="errorMessage d-none" id="passwordLength">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Wrong Password Length(eg. length = 8)!
-                  </label>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Phone No.</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="phone"
-                    name="phone"
-                    placeholder="Enter your phone number"
-                  />
-                  <label class="errorMessage d-none" id="phoneRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Phone Number!
-                  </label>
-                  <label class="errorMessage d-none" id="phoneFormat">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Wrong Phone Number Format(eg. 09123456789)!
-                  </label>
-                  <label class="errorMessage d-none" id="phoneLength">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Wrong Phone Number Length(eg. length = 11)!
-                  </label>
-                </div>
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>NRC</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nrc"
-                    placeholder="Enter your NRC"
-                    name="nrc"
-                  />
-                  <label class="errorMessage d-none" id="nrcRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require NRC!
-                  </label>
-                </div>
-              </div>
-
-              <!-- Gebder -->
-              <div class="form-row">
-                <div class="col-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Gender</span>
-                  </label>
-                  <div class="row">
-                    <div
-                      class="form-group col-5"
-                      th:each="entry : ${genderList}"
-                    >
-                      <label
-                        class="form-control common_rdo gender"
-                        id="'genderList_'+${entry.key}"
-                      >
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gender"
-                            th:value="${entry.key}"
-                            th:id="'gender_' + ${entry.key}"
-                          />
-                          <span
-                            class="form-check-label"
-                            th:text="${entry.value}"
-                          ></span>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2 class="form-header text-center">Register</h2>
+                    <form th:action="@{/register}" th:object="${userinfo}" method="post" id="regForm">
+                        <div class="form-row">
+                            <!-- Name -->
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Name</span>
+                                </label>
+                                <input type="text" class="form-control" maxlength="30" id="name" name="name"
+                                    placeholder="Enter your name" />
+                                <label class="errorMessage d-none" id="nameRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Name!
+                                </label>
+                            </div>
+                            <!-- Father Name -->
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Father's Name</span>
+                                </label>
+                                <input type="text" class="form-control" maxlength="30" id="fatherName" name="fatherName"
+                                    placeholder="Enter your father's name" />
+                                <label class="errorMessage d-none" id="fatherNameRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Father's Name!
+                                </label>
+                            </div>
                         </div>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="form-group">
-                    <label>
-                      <span class="require">*</span>
-                      <span>Role</span>
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="role"
-                      placeholder="Enter your role"
-                      name="role"
-                    />
-                    <label class="errorMessage d-none" id="roleRequire">
-                      <img src="/images/warning.svg" alt="svg" />
-                      Require Role!
-                    </label>
-                  </div>
-                </div>
-              </div>
 
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Date Of Birth</span>
-                  </label>
-                  <input type="date" class="form-control" id="dob" name="dob" />
-                  <label class="errorMessage d-none" id="dobRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Date Of Birth!
-                  </label>
-                </div>
+                        <div class="form-row">
+                            <!-- Email -->
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Email</span>
+                                </label>
+                                <input type="text" class="form-control" maxlength="30" id="email" name="email"
+                                    placeholder="Enter your email" autocomplete="username" />
+                                <label class="errorMessage d-none" id="emailRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Email!
+                                </label>
+                                <label class="errorMessage d-none" id="emailFormat">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Email Format!
+                                </label>
+                            </div>
+                            <!-- Password -->
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Password</span>
+                                </label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Enter your password" autocomplete="current-password" />
+                                <label class="errorMessage d-none" id="passwordRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Password!
+                                </label>
+                                <label class="errorMessage d-none" id="passwordFormat">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Password Format!
+                                </label>
+                                <label class="errorMessage d-none" id="passwordLength">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Password Length(eg. length = 8)!
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Phone No.</span>
+                                </label>
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="Enter your phone number" />
+                                <label class="errorMessage d-none" id="phoneRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Phone Number!
+                                </label>
+                                <label class="errorMessage d-none" id="phoneFormat">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Phone Number Format(eg. 09123456789)!
+                                </label>
+                                <label class="errorMessage d-none" id="phoneLength">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Phone Number Length(eg. length = 11)!
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>NRC</span>
+                                </label>
+                                <input type="text" class="form-control" id="nrc" placeholder="Enter your NRC"
+                                    name="nrc" />
+                                <label class="errorMessage d-none" id="nrcRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require NRC!
+                                </label>
+                            </div>
+                        </div>
 
-                <div class="form-group col-md-6">
-                  <label>
-                    <span class="require">*</span>
-                    <span>Age</span>
-                  </label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="age"
-                    placeholder="Enter your age"
-                    name="age"
-                  />
-                  <label class="errorMessage d-none" id="ageRequire">
-                    <img src="/images/warning.svg" alt="svg" />
-                    Require Age!
-                  </label>
+                        <!-- Gebder -->
+                        <div class="form-row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Gender</span>
+                                </label>
+                                <div class="row">
+                                    <div class="form-group col-6" th:each="entry : ${genderList}">
+                                        <label class="form-control common_rdo gender" th:id="'list_' + ${entry.key}">
+                                            <div class="form-check">
+                                                <input class="form-check-input gendereq" type="radio" name="gender"
+                                                    th:value="${entry.key}" th:id="'gender_' + ${entry.key}" />
+                                                <span class="form-check-label" th:text="${entry.value}"></span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <label class="errorMessage d-none" id="genderRequire">
+                                        <img src="/images/warning.svg" alt="svg" />
+                                        Require Gender!
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>
+                                        <span class="require">*</span>
+                                        <span>Role</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="role" placeholder="Enter your role"
+                                        name="role" />
+                                    <label class="errorMessage d-none" id="roleRequire">
+                                        <img src="/images/warning.svg" alt="svg" />
+                                        Require Role!
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Date Of Birth</span>
+                                </label>
+                                <input type="date" class="form-control" id="dob" name="dob" />
+                                <label class="errorMessage d-none" id="dobRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Date Of Birth!
+                                </label>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <span class="require">*</span>
+                                    <span>Age</span>
+                                </label>
+                                <input type="number" class="form-control" id="age" placeholder="Enter your age"
+                                    name="age" />
+                                <label class="errorMessage d-none" id="ageRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Age!
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="require">*</span>
+                                <span>Address</span>
+                            </label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"
+                                name="address"></textarea>
+                            <label class="errorMessage d-none" id="addressRequire">
+                                <img src="/images/warning.svg" alt="svg" />
+                                Require Address!
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block nextBtn mx-auto mt-5" id="nextBtn">
+                            Register
+                        </button>
+                    </form>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>
-                  <span class="require">*</span>
-                  <span>Address</span>
-                </label>
-                <textarea
-                  class="form-control"
-                  id="address"
-                  rows="3"
-                  placeholder="Enter your address"
-                  name="address"
-                ></textarea>
-                <label class="errorMessage d-none" id="addressRequire">
-                  <img src="/images/warning.svg" alt="svg" />
-                  Require Address!
-                </label>
-              </div>
-              <button
-                type="button"
-                class="btn btn-primary btn-block"
-                id="nextBtn"
-              >
-                Register
-              </button>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>

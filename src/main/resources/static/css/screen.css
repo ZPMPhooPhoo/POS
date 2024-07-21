@@ -19,6 +19,7 @@
     --size-18:18px;
     --size-20:20px;
     --size-45:45px;
+    --size-300:300px;
 
 }
 
@@ -63,4 +64,8 @@ body{
 
 .error{
     border-color: var(--red-color) !important;
+}
+
+.nextBtn{
+    width: var(--size-300) !important;
 }
