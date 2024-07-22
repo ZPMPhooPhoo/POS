@@ -1,13 +1,162 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{common/linkcdn}">
+    layout:decorate="~{common/singleLayout}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-</head>
-<body>
+    <script th:inline="javascript">
+        document.getElementById("pagetitle").innerText = "Login";
+        $(document).ready(function () {
 
+            //email require and format check
+            function emailRequiredCheck() {
+                var val = $("#email").val();
+                if (require(val)) {
+                    if (validateEmail(val)) {
+                        $("#emailRequire").addClass("d-none");
+                        $("#emailFormat").addClass("d-none");
+                        $("#email").removeClass("error");
+                        emailCheck = true;
+                    } else {
+                        $("#emailRequire").addClass("d-none");
+                        $("#emailFormat").removeClass("d-none");
+                        $("#email").addClass("error");
+                        emailCheck = false;
+                    }
+                } else {
+                    $("#emailRequire").removeClass("d-none");
+                    $("#emailFormat").addClass("d-none");
+                    $("#email").addClass("error");
+                    emailCheck = false;
+                }
+            }
+            //password require and format check
+            function passwordRequiredCheck() {
+                var val = $("#password").val();
+                if (require(val)) {
+                    if (!passLength(val, 8)) {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").removeClass("d-none");
+                        $("#passwordFormat").addClass("d-none");
+                        $("#password").addClass("error");
+                        passwordCheck = false;
+                    } else if (!passFormat(val)) {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").addClass("d-none");
+                        $("#passwordFormat").removeClass("d-none");
+                        $("#password").addClass("error");
+                        passwordCheck = false;
+                    } else {
+                        $("#passwordRequire").addClass("d-none");
+                        $("#passwordLength").addClass("d-none");
+                        $("#passwordFormat").addClass("d-none");
+                        $("#password").removeClass("error");
+                        passwordCheck = true;
+                    }
+                } else {
+                    $("#passwordRequire").removeClass("d-none");
+                    $("#passwordLength").addClass("d-none");
+                    $("#passwordFormat").addClass("d-none");
+                    $("#password").addClass("error");
+                    passwordCheck = false;
+                }
+            }
+            $("#email").on("input", function () {
+                emailRequiredCheck();
+            });
+
+            $("#password").on("input", function () {
+                passwordRequiredCheck();
+            });
+
+            $("#nextBtn").on("click", function () {
+                emailRequiredCheck();
+                passwordRequiredCheck();
+
+                if (
+                    emailCheck &&
+                    passwordCheck
+                ) {
+                    $.ajax({
+                        url: '/checkUser',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            email: $("#email").val(),
+                            password: $("#password").val()
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error: " + error);
+                        }
+                    });
+
+                    // $("#loginForm").submit();
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/login}" th:object="${user}" method="post" id="loginForm">
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                <label class="errorMessage d-none" id="emailRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Email!
+                                </label>
+                                <label class="errorMessage d-none" id="emailFormat">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Email Format!
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <label class="errorMessage d-none" id="passwordRequire">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Require Password!
+                                </label>
+                                <label class="errorMessage d-none" id="passwordFormat">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Password Format!
+                                </label>
+                                <label class="errorMessage d-none" id="passwordLength">
+                                    <img src="/images/warning.svg" alt="svg" />
+                                    Wrong Password Length(eg. length is 8)!
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-block nextBtn mx-auto mt-5"
+                                id="nextBtn">Login</button>
+                            <label class="errorMessage mt-3 d-none" id="accountCheck">
+                                No Register User !
+                            </label>
+                            <label class="errorMessage mt-3 d-none" id="invalidPass">
+                                Invalid Password !
+                            </label>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>Don't have an account? <a href="/register">Register here</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

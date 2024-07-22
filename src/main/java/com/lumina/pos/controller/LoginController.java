@@ -31,19 +31,41 @@ public class LoginController {
             model.addAttribute("user", user);
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
-            return "redirect:/common/error";
+            return "redirect:/error";
         }
         return "login/register";
     }
     @RequestMapping(value = "/register", method=RequestMethod.POST)
     public String register(User user,Model model) {
         try {
-            logger.info("Register Screen!"+user);
+            logger.info("Create Successfully!"+user);
             userService.CreateUser(user);
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
-            return "redirect:/common/error";
+            return "redirect:/error";
         }
         return "redirect:/register";
+    }
+
+    @RequestMapping(value = "/", method=RequestMethod.GET)
+    public String login(Model model) {
+        try {
+            logger.info("Access Login Screen!");
+        } catch (Exception e) {
+            logger.warn(e.getLocalizedMessage());
+            return "redirect:/error";
+        }
+        return "login/login";
+    }
+
+    @RequestMapping(value = "/login", method=RequestMethod.POST)
+    public String Login(Model model) {
+        try {
+            logger.info("Access Login Screen!");
+        } catch (Exception e) {
+            logger.warn(e.getLocalizedMessage());
+            return "redirect:/error";
+        }
+        return "login/login";
     }
 }

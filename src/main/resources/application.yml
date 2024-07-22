@@ -13,9 +13,9 @@ spring:
 #           auth: true
 #           starttls:
 #             enable: true
-# server:
-#   port: 8080
-#   servlet:
-#     session:
-#       timeout: 1800
+server:
+  port: 8082
+  servlet:
+    session:
+      timeout: 1800
 

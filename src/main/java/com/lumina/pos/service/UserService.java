@@ -14,4 +14,9 @@ public class UserService {
     public void CreateUser(User user){
         userRepo.save(user);
     }
+
+    public String checkUser(String email,boolean delFlag){
+        
+        return "";
+    }
 }
