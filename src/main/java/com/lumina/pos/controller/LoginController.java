@@ -14,6 +14,7 @@ import com.lumina.pos.model.User;
 import com.lumina.pos.service.UserService;
 
 import ch.qos.logback.classic.Logger;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -48,24 +49,47 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
-    public String login(Model model) {
+    public String login(Model model,HttpSession session) {
         try {
             logger.info("Access Login Screen!");
+            if(session.getAttribute("invalidPass")!=null){
+                model.addAttribute("invalidPass", true);
+            }
+
+            if(session.getAttribute("loginInfo")!=null){
+                return "redirect:/home";
+            }
+            return "login/login";
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
             return "redirect:/error";
         }
-        return "login/login";
     }
 
     @RequestMapping(value = "/login", method=RequestMethod.POST)
-    public String Login(Model model) {
+    public String Login(Model model,User user,HttpSession session) {
         try {
             logger.info("Access Login Screen!");
+            boolean delFlag=false;
+            boolean result=userService.lofinAuth(user.getEmail(),user.getPassword(),delFlag);
+            if(result){
+                logger.info("Login Successful!");
+                session.setAttribute("loginInfo", user.getEmail());
+                return "redirect:/home";
+            }else{
+                logger.info("Login Fail!");
+                session.setAttribute("invalidPass", "true");
+                return "redirect:/logout";
+            }
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
             return "redirect:/error";
         }
-        return "login/login";
     }
+    @RequestMapping(value = "/logout", method=RequestMethod.POST)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+    
 }

@@ -8,7 +8,11 @@
     <script th:inline="javascript">
         document.getElementById("pagetitle").innerText = "Login";
         $(document).ready(function () {
-
+            var invalidPass = /*[[${invalidPass}]]*/ false;
+            if(invalidPass){
+                $("invalidPass").removeClass("d-none");
+                $("#accountCheck").addClass("d-none");
+            }
             //email require and format check
             function emailRequiredCheck() {
                 var val = $("#email").val();
@@ -79,22 +83,25 @@
                     passwordCheck
                 ) {
                     $.ajax({
-                        url: '/checkUser',
+                        url: '/checkEmail',
                         type: 'GET',
                         dataType: 'json',
                         data: {
-                            email: $("#email").val(),
-                            password: $("#password").val()
+                            email: $("#email").val()
                         },
                         success: function (response) {
                             console.log(response);
+                            if(response){
+                            $("#loginForm").submit();
+                            }else{
+                                $("#accountCheck").removeClass("d-none");
+                                $("invalidPass").addClass("d-none");
+                            }
                         },
                         error: function (xhr, status, error) {
                             console.error("Error: " + error);
                         }
                     });
-
-                    // $("#loginForm").submit();
                 }
             });
 
@@ -114,7 +121,7 @@
                         <form th:action="@{/login}" th:object="${user}" method="post" id="loginForm">
                             <div class="form-group">
                                 <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" autocomplete="username">
                                 <label class="errorMessage d-none" id="emailRequire">
                                     <img src="/images/warning.svg" alt="svg" />
                                     Require Email!
@@ -126,7 +133,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="current-password">
                                 <label class="errorMessage d-none" id="passwordRequire">
                                     <img src="/images/warning.svg" alt="svg" />
                                     Require Password!
@@ -158,5 +165,4 @@
         </div>
     </div>
 </body>
-
 </html>

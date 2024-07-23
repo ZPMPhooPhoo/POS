@@ -15,8 +15,13 @@ public class UserService {
         userRepo.save(user);
     }
 
-    public String checkUser(String email,boolean delFlag){
-        
-        return "";
+    public Boolean checkUser(String email,boolean delFlag){
+        boolean res=userRepo.existsByEmailAndDelFlag(email, delFlag);
+        return res;
+    }
+
+    public Boolean lofinAuth(String email,String password,boolean delFlag){
+        boolean res=userRepo.existsByEmailAndPasswordAndDelFlag(email,password, delFlag);
+        return res;
     }
 }
