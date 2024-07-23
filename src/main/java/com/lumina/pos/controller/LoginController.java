@@ -50,15 +50,15 @@ public class LoginController {
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
     public String login(Model model,HttpSession session) {
+        if(session.getAttribute("loginInfo")!=null){
+            return "redirect:/home";
+        }
         try {
             logger.info("Access Login Screen!");
             if(session.getAttribute("invalidPass")!=null){
                 model.addAttribute("invalidPass", true);
             }
 
-            if(session.getAttribute("loginInfo")!=null){
-                return "redirect:/home";
-            }
             return "login/login";
         } catch (Exception e) {
             logger.warn(e.getLocalizedMessage());
@@ -74,7 +74,7 @@ public class LoginController {
             boolean result=userService.lofinAuth(user.getEmail(),user.getPassword(),delFlag);
             if(result){
                 logger.info("Login Successful!");
-                session.setAttribute("loginInfo", user.getEmail());
+                session.setAttribute("loginInfo", "loginOk");
                 return "redirect:/home";
             }else{
                 logger.info("Login Fail!");
@@ -86,9 +86,10 @@ public class LoginController {
             return "redirect:/error";
         }
     }
-    @RequestMapping(value = "/logout", method=RequestMethod.POST)
+    @RequestMapping(value = "/logout", method=RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.invalidate();
+        logger.info("LogOut!");
+        session.removeAttribute("loginInfo");
         return "redirect:/";
     }
     

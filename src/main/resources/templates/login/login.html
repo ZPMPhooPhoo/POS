@@ -9,6 +9,7 @@
         document.getElementById("pagetitle").innerText = "Login";
         $(document).ready(function () {
             var invalidPass = /*[[${invalidPass}]]*/ false;
+            console.log(invalidPass);
             if(invalidPass){
                 $("invalidPass").removeClass("d-none");
                 $("#accountCheck").addClass("d-none");

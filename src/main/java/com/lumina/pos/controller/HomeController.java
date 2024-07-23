@@ -12,10 +12,11 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(HomeController.class);
-    
+
     @RequestMapping(value = "/home", method=RequestMethod.GET)
     public String home(HttpSession session) {
         try {
+            logger.info("Access Login Screen!");
             if(session.getAttribute("loginInfo")!=null){
                 return "home/index";
             }else{

@@ -304,7 +304,25 @@
                     addressCheck &&
                     genderCheck
                 ) {
-                    $("#regForm").submit();
+                    $.ajax({
+                        url: '/checkEmail',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            email: $("#email").val()
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if(!response){
+                            $("#regForm").submit();
+                            }else{
+                                $("#accountCheck").removeClass("d-none");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error: " + error);
+                        }
+                    });
                 }
             });
         });
@@ -499,10 +517,13 @@
                                 Require Address!
                             </label>
                         </div>
-                        <button type="button" class="btn btn-primary btn-block nextBtn mx-auto mt-5" id="nextBtn">
+                        <label class="errorMessage mt-3 d-none" id="accountCheck">
+                            User already exist!
+                        </label>
+                        <button type="button" class="btn btn-primary btn-block nextBtn mx-auto mt-3" id="nextBtn">
                             Register
                         </button>
-                    </form>
+                    </form> 
                     <div class="text-center mt-3">
                         <small>This user have already account! <a href="/">Login</a></small>
                     </div>
