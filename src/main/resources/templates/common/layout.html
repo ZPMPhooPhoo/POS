@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lumina Shop</title>
+    <title>Lumina Restaurant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -17,21 +18,32 @@
 </head>
 
 <body>
-    <div class="row">
+    <div class="my_container">
+        <div class="row">
+            <div class="col-3" >
+                <img src="/images/pos.svg" alt="svg"  class="title_logo">
+
+            </div>
+            <div class="col-9">
+
+            </div>
+        </div>
         <!-- Sidebar -->
-        <div class="sidebar col-2">
-            <h1 class="mt-3 text-center">SideBar</h1>
-            <!-- <ul class="mt-5">
-                <li onclick="location.href='/home'">Home <img src="image/chevron-right.svg" alt="svg" class="chevron-right"></li>
-                <hr>
-                <li onclick="location.href='/menu'">Menu <img src="image/chevron-right.svg" alt="svg" class="chevron-right"></li>
-                <hr>
-                <li onclick="location.href='/payment'">Payment <img src="image/chevron-right.svg" alt="svg" class="chevron-right"></li>
-                <hr>
-                <li onclick="location.href='/order'">Order <img src="image/chevron-right.svg" alt="svg" class="chevron-right"></li>
-                <hr>
-            </ul>
-            <button class="btn btn-danger justify-content-center col-11 mx-2 mt-5" onclick="location.href='/logout'">Logout</button> -->
+         <div class="row">
+        <div class="sidebar col-1 text-center">
+            <div class="mt-4 ps-2">
+                <img src="/images/home.svg" alt="svg" class="sidebar_logo">
+            </div>
+            <div class="mt-4 ps-2">
+                <img src="/images/menu.svg" alt="svg" class="sidebar_logo">
+            </div>
+            <div class="mt-4 ps-2">
+                <img src="/images/payment.svg" alt="svg" class="sidebar_logo">
+            </div>
+            <div class="mt-5 ps-2">
+                <button class="logout_btn btn" >Logout</button>
+            </div>
+           
         </div>
 
         <!-- Content -->
@@ -41,10 +53,11 @@
             </section>
         </div>
 
-        <!-- Right area
+        
         <div class="col-3">
             <h1>R-area</h1>
-        </div> -->
+        </div>
+    </div>
     </div>
 </body>
 

@@ -19,15 +19,30 @@
     --size-18:18px;
     --size-20:20px;
     --size-45:45px;
+    --size-80:80px;
     --size-300:300px;
+    --size-100:100px;
+    --size-100:100px;
+    --size-150:150px;
+    --size-150:150px;
 
 }
 
-body{
+.my_container{
+    margin-left: var(--size-20) !important;
+    margin-right:var(--size-20) !important;
     font-family: var(--font-family) !important;
     background-color: var(--white-color) !important;
 }
-
+.title_logo{
+    width: var(--size-100) !important;
+    cursor: pointer;
+    margin-left:var(--size-12) !important ;
+}
+.sidebar_logo{
+    width:40px;
+    cursor: pointer;
+}
 
 .form-container {
     padding: 30px;
@@ -68,4 +83,15 @@ body{
 
 .nextBtn{
     width: var(--size-300) !important;
+}
+
+.logout_btn{
+    width: 80px;
+    color:#f4152b;
+    border-color: #f4152b;
+}
+.logout_btn{
+    width: 80px;
+    color:#f4152b;
+    border-color: #f4152b;
 }

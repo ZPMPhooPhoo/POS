@@ -1,0 +1,15 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .text {
+      font-family: Arial, sans-serif;
+      font-size: 72px;
+      font-weight: bold;
+    }
+    .text-blue { fill: #499999; }
+    .text-orange { fill: #d79c61; }
+    .text-green { fill: #52663e; }
+  </style>
+  <text x="10" y="72" class="text text-blue">P</text>
+  <text x="70" y="72" class="text text-orange">O</text>
+  <text x="130" y="72" class="text text-green">S</text>
+</svg>
