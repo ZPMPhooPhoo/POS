@@ -11,6 +11,7 @@
   --red-color: #f4152b;
   --blue-color: #2d0aee;
   --salmon-color: #d89f65;
+  --salmon-green:#B1CED4;
 
   --size-1: 1px;
   --size-2: 2px;
@@ -110,6 +111,7 @@ body {
 
 .sidebar_label{
     color:var(--light-orange) !important;
+    cursor: pointer;
 
 }
 .title_logo{
@@ -126,4 +128,29 @@ body {
     margin-right:var(--size-20) !important;
     font-family: var(--font-family) !important;
     background-color: var(--white-color) !important;
+}
+.searchItem{
+    background-color: var(--light-blue) !important;
+    position: absolute;
+}
+.main_title_time{
+    font-size: var(--size-14) !important;
+    margin-top: 30px;
+    font-weight: 700;
+    padding-left: 30px;
+}
+.addBtn{
+    width:140px;
+    height: 40px;
+    background-color: var(--salmon-green) !important;
+    margin-top: 20px;
+}
+.search_logo{
+    position: relative;
+    cursor: pointer;
+    left: 99%;
+    top:30%;
+}
+.logo_title{
+    border-bottom:var(--salmon-green) solid;
 }
