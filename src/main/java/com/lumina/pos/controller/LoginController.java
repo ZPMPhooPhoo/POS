@@ -45,7 +45,7 @@ public class LoginController {
             logger.warn(e.getLocalizedMessage());
             return "redirect:/error";
         }
-        return "redirect:/register";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/", method=RequestMethod.GET)
@@ -75,6 +75,7 @@ public class LoginController {
             if(result){
                 logger.info("Login Successful!");
                 session.setAttribute("loginInfo", "loginOk");
+                session.removeAttribute("invalidPass");
                 return "redirect:/home";
             }else{
                 logger.info("Login Fail!");
