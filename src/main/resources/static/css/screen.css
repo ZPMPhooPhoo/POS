@@ -106,3 +106,24 @@ body {
 .table-custom td {
   background-color: #ffffff; /* White background for table cells */
 }
+
+
+.sidebar_label{
+    color:var(--light-orange) !important;
+
+}
+.title_logo{
+    width: var(--size-100) !important;
+    cursor: pointer;
+    margin-left:var(--size-12) !important ;
+}
+.sidebar_logo{
+    width:40px;
+    cursor: pointer;
+}
+.my_container{
+    margin-left: var(--size-20) !important;
+    margin-right:var(--size-20) !important;
+    font-family: var(--font-family) !important;
+    background-color: var(--white-color) !important;
+}
