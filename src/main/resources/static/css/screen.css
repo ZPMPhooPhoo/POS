@@ -86,12 +86,12 @@
 }
 
 .logout_btn{
-    width: 80px;
-    color:#f4152b;
-    border-color: #f4152b;
+    width: var(--size-80) !important;
+    color: var(--red-color) !important;
+    border-color:  var(--red-color) !important;
 }
-.logout_btn{
-    width: 80px;
-    color:#f4152b;
-    border-color: #f4152b;
+
+.sidebar_label{
+    color:var(--light-orange) !important;
+
 }
