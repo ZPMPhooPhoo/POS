@@ -1,0 +1,55 @@
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{common/layout}"
+>
+  <head> </head>
+
+  <body>
+    <div layout:fragment="content">
+      <div class="container">
+        <div class="row payment_order">
+          <div class="col-6">
+            <label>
+              <span>ORDER#:</span>
+              <span>12564878</span>
+            </label>
+          </div>
+          <div class="col-3">
+            <label>
+              <span>TABLE:</span>
+              <span class="table_time_value">1</span>
+            </label>
+          </div>
+          <div class="col-3">
+            <label>
+              <span>TIME:</span>
+              <span class="table_time_value">20:02PM</span>
+            </label>
+          </div>
+        </div>
+        <table class="table table-custom">
+          <thead>
+            <tr>
+              <th>ITEM</th>
+              <th>PRICE</th>
+              <th>QTY</th>
+              <th>SUBTOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12564878</td>
+              <td>This is a sample description.</td>
+            </tr>
+            <tr>
+              <td>12564879</td>
+              <td>This is another description.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

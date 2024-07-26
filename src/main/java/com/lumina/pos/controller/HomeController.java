@@ -27,4 +27,19 @@ public class HomeController {
             return "redirect:/error";
         }
     }
+
+    @RequestMapping(value = "/payment", method=RequestMethod.GET)
+    public String payment(HttpSession session) {
+        try {
+            logger.info("Access Login Screen!");
+            if(session.getAttribute("loginInfo")!=null){
+                return "home/payment";
+            }else{
+                return "redirect:/logout";
+            }
+        } catch (Exception e) {
+            logger.warn("home page : " +e.getMessage());
+            return "redirect:/error";
+        }
+    }
 }
